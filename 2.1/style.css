@@ -1,0 +1,332 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+/* Custom properties for maintainability */
+:root {
+    --primary-color: #007acc;
+    --secondary-color: #00cc4e;
+    --correct-color: #ffd700;
+    --incorrect-color: #ff4d4f;
+    --text-color: #ffffff;
+    --muted-text-color: #bfbfbf;
+    --background-color: #1e1e1e;
+    --shadow-color: rgba(0, 0, 0, 0.2);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    display: flex;
+    padding: 0 20px;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: var(--background-color) url('mehe.jpg') no-repeat center/cover;
+}
+
+#paragraph {
+    color: var(--muted-text-color);
+}
+
+.result-details {
+    color: var(--text-color);
+}
+
+::selection {
+    color: var(--text-color);
+    background: var(--primary-color);
+}
+
+.wrapper {
+    width: 1400px;
+    padding: 35px;
+    background: var(--background-color);
+    border-radius: 10px;
+    box-shadow: 0 10px 15px var(--shadow-color);
+}
+
+/* New Game Title Styling */
+.game-title {
+    font-size: 48px;
+    font-weight: 700;
+    color: var(--text-color);
+    text-align: center;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 4px var(--shadow-color);
+}
+
+.wrapper .input-field {
+    opacity: 0;
+    z-index: -999;
+    position: absolute;
+}
+
+.wrapper .input-field:focus {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
+.wrapper .input-field:disabled {
+    cursor: not-allowed;
+}
+
+.wrapper .content-box {
+    padding: 20px 30px 0;
+    border-radius: 10px;
+    border: 4px solid var(--primary-color);
+}
+
+.content-box .typing-text {
+    max-height: 512px;
+    overflow-y: auto;
+}
+
+.typing-text::-webkit-scrollbar {
+    width: 8px;
+}
+
+.typing-text::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 4px;
+}
+
+.typing-text p {
+    font-size: 21px;
+    text-align: justify;
+    letter-spacing: 1px;
+    word-break: break-word;
+}
+
+.typing-text p[aria-live="assertive"] {
+    font-size: 18px;
+    color: var(--secondary-color);
+    text-align: center;
+    margin-top: 10px;
+    font-weight: 500;
+}
+
+.typing-text p span {
+    position: relative;
+}
+
+.typing-text p span.correct {
+    color: var(--correct-color);
+}
+
+.typing-text p span.incorrect {
+    color: var(--incorrect-color);
+    border-radius: 4px;
+}
+
+.typing-text p span.active {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+.typing-text p span.active::before {
+    position: absolute;
+    content: "";
+    height: 2px;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    opacity: 0;
+    border-radius: 5px;
+    background: var(--secondary-color);
+    animation: blink 1s ease-in-out infinite;
+}
+
+.typing-text.cursor {
+    border-right: 2px solid var(--primary-color);
+    animation: cursor-blink 0.7s step-end infinite;
+}
+
+@keyframes cursor-blink {
+    50% {
+        border-color: transparent;
+    }
+}
+
+@keyframes blink {
+    50% {
+        opacity: 1;
+    }
+}
+
+.content-box .content {
+    margin-top: 17px;
+    display: flex;
+    padding: 12px 0;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 3px solid var(--secondary-color);
+}
+
+/* Button group for equal spacing */
+.button-group {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.sound-toggle-button,
+.mode-toggle-button,
+.retry-button {
+    outline: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px 16px;
+    font-size: 16px;
+    border-radius: 20px;
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    transition: background-color 0.3s ease;
+}
+
+.sound-toggle-button:hover,
+.mode-toggle-button:hover,
+.retry-button:hover {
+    background-color: #005f80;
+}
+
+.sound-toggle-button:focus,
+.mode-toggle-button:focus,
+.retry-button:focus {
+    outline: 2px solid var(--secondary-color);
+    outline-offset: 2px;
+}
+
+.retry-button {
+    width: 105px;
+    border: 3px solid var(--primary-color);
+    background: none;
+    transition: transform 0.2s ease, background-color 0.3s ease;
+}
+
+.retry-button:hover {
+    background: var(--text-color);
+    color: var(--background-color);
+}
+
+.retry-button:active {
+    transform: scale(0.89);
+}
+
+.retry-button:focus {
+    outline: 2px solid var(--secondary-color);
+    outline-offset: 2px;
+}
+
+.content .result-details {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    width: 50%;
+    justify-content: space-evenly;
+}
+
+.result-details li {
+    display: flex;
+    height: 20px;
+    list-style: none;
+    position: relative;
+    align-items: center;
+}
+
+.result-details li:not(:first-child) {
+    padding-left: 22px;
+    border-left: 2px solid var(--muted-text-color);
+}
+
+.result-details li .label {
+    font-size: 15px;
+    color: var(--text-color);
+    margin-right: 5px; /* Space between label and value */
+}
+
+.result-details li .value {
+    display: block;
+    font-size: 15px;
+    color: var(--text-color);
+}
+
+.result-details li .value b {
+    font-weight: 500;
+}
+
+.result-details li:not(:first-child) .value {
+    font-weight: 500;
+}
+
+@media (max-width: 745px) {
+    .wrapper {
+        padding: 20px;
+    }
+    .content-box .content {
+        padding: 20px 0;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .content-box .typing-text {
+        max-height: none;
+    }
+    .typing-text p {
+        font-size: 19px;
+        text-align: left;
+    }
+    .typing-text p[aria-live="assertive"] {
+        font-size: 16px;
+    }
+    .button-group {
+        width: 100%;
+        flex-direction: column;
+        gap: 10px;
+    }
+    .retry-button,
+    .sound-toggle-button,
+    .mode-toggle-button {
+        width: 100%;
+        font-size: 15px;
+        padding: 10px 0;
+    }
+    .content .result-details {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+    .result-details li:not(:first-child) {
+        border-left: 0;
+        padding: 0;
+    }
+    .result-details li .label,
+    .result-details li .value {
+        font-size: 14px;
+    }
+    .game-title {
+        font-size: 36px;
+    }
+}
+
+@media (max-width: 518px) {
+    .wrapper .content-box {
+        padding: 10px 15px 0;
+    }
+    .typing-text p {
+        font-size: 16px;
+    }
+    .typing-text p[aria-live="assertive"] {
+        font-size: 14px;
+    }
+    .result-details li {
+        margin-bottom: 10px;
+    }
+    .game-title {
+        font-size: 28px;
+    }
+}
